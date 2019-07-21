@@ -5,10 +5,10 @@
 #define MAX_OPTION_LEN 128
 /* #define DEBUG */
 
-/* #ifdef DEBUG */
-/* #include <stdio.h> */
-/* char debug_message[128]; */
-/* #endif */
+#ifdef DEBUG
+#include <stdio.h>
+char debug_message[128];
+#endif
 
 int check_option(char* options[], size_t option_size, unsigned char voter_lock_hash[]);
 
@@ -40,10 +40,10 @@ int main() {
     ret = ckb_load_cell_by_field(lock_hash, &hash_size, 0, input_index,
                                  CKB_SOURCE_INPUT, CKB_CELL_FIELD_LOCK_HASH);
     if (ret != CKB_SUCCESS) {
-/* #ifdef DEBUG */
-/*       sprintf(debug_message, "load input#%d's lock hash failed", input_index); */
-/*       ckb_debug(debug_message); */
-/* #endif */
+#ifdef DEBUG
+      sprintf(debug_message, "load input#%d's lock hash failed", input_index);
+      ckb_debug(debug_message);
+#endif
       return ret;
     }
     for (size_t i = 0; i < voter_size; i++) {
@@ -82,10 +82,10 @@ inline int check_option(char* options[], size_t option_size, unsigned char voter
       ret = ckb_load_cell_by_field(option, &max_option_len, 0, output_index,
                                    CKB_SOURCE_OUTPUT, CKB_CELL_FIELD_DATA);
       if (ret != CKB_SUCCESS) {
-/* #ifdef DEBUG */
-/*         sprintf(debug_message, "load output#%d's data failed", output_index); */
-/*         ckb_debug(debug_message); */
-/* #endif */
+#ifdef DEBUG
+        sprintf(debug_message, "load output#%d's data failed", output_index);
+        ckb_debug(debug_message);
+#endif
         return ret;
       }
 
